@@ -23,7 +23,7 @@ const ResultsComponent = ({ userAnswers }) => {
       e.preventDefault();
       
       // Update the window location to the dynamic value
-      window.location.href = `../${topResult}/`;
+      window.location.href = `../explore/${topResult}/`;
     };
 
     const topResult = calculateTopResult();  

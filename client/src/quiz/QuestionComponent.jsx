@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Question1 = ({ selectedOption, onOptionChange, onNext }) => (
   <div>
-    <p>Question 1: What skills do you believe are crucial for success?</p>
+    <p>Question 1: WWhat skills do you believe are crucial for success?</p>
     <input
       type="radio"
       name="q1"
@@ -136,7 +136,7 @@ const Question4 = ({ selectedOption, onOptionChange, onNext }) => (
       checked={selectedOption === "Chemistry"}
       onChange={onOptionChange}
     />
-    C. Chemical experiments
+    C. CheQmical experiments
     <br />
     <br />
     <button onClick={() => onNext()}>Submit</button>

@@ -1,40 +1,39 @@
 import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
 
-const LoginComponent = () => {
-  const [username, setUsername] = useState('');
+const RegisterComponent = () => {
+    const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     // TODO: Change localhost to something else
-    const response = await fetch('http://localhost:8000/api/users/login', {
+    const response = await fetch('http://localhost:8000/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         username,
+        email,
         password,
       }),
     });
 
     const data = await response.json();
-    
-    if (data.message === 'Login successful') {
-      window.location.href = '/quiz';
-    } 
-    else {
-      setErrorMessage('Incorrect username or password');
-    }
 
+    if (data.message === 'User registered successfully') {
+      window.location.href = '/';
+    }
+    else {
+      setErrorMessage(data.message);
+    }
   };
 
   return (
-    <div className='login'>
-      <h1>Login Page</h1>
-      <div className="login_container">
+    <div className='register'>
+      <h1>Registration Page</h1>
+      <div className="register_container">
         <label id="userlabel"> Username </label>
         <input 
           type="text" 
@@ -42,6 +41,14 @@ const LoginComponent = () => {
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+        />
+        <label id='emaillabel'> Email </label>
+        <input 
+          type="email" 
+          placeholder="Enter Email" 
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <label id='passlabel'> Password </label>
         <input 
@@ -54,19 +61,14 @@ const LoginComponent = () => {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button 
           type="submit" 
-          id="loginButton" 
-          onClick={handleLogin}
+          id="registerButton" 
+          onClick={handleRegister}
         > 
-          Login 
+          Register 
         </button>
-            <NavLink to="/register">
-          <button type="submit" id="registerButton" > 
-            Register 
-          </button>
-          </NavLink>
       </div>
     </div>
   );
 };
 
-export default LoginComponent;
+export default RegisterComponent;
